@@ -59,9 +59,6 @@ def train_model(trainX, trainY, testX, testY):
 
 	model.fit(trainX, trainY, epochs = 100, callbacks= my_callbacks, validation_split = 0.2)
 	model.evaluate(testX, testY)
-	
-	#!mkdir -p saved_model
-	model.save('saved_model/my_model')
 
 	predictedY = model.predict(testX[:5])
 
