@@ -20,34 +20,31 @@ def main():
 	#train_model(trainX, trainY, testX, testY)
 
 	model = load_model("mnist_model.h5")
+
+	plot_predicted_data(testX, testY, model)
+
+
+def modelSummary(model):
 	print()
 	model.summary()
 	print()
 
+def plot_predicted_data(testX, testY, model):
+	plt.figure(figsize=(20, 20))
+
 	n = 5
 	predictedY = model.predict(testX[:n])
-
-	plot_predicted_data(testX[:n], testY[:n], n, predictedY)
-
-	#print(np.argmax(predictedY))
-	#plot_single_data(testX[:1], testY[:1])
-
-	
-
-def plot_predicted_data(testX, testY, n, predictedY):
-
-	plt.figure(figsize=(20, 20))
 
 	for i in range(n):
 		print(f'\n\nPredicted Value: {np.argmax(predictedY[i])}\n')
 
 		plt.subplot(3, 3, i+1)
 		plt.imshow(testX[i], cmap = 'gray')
-		#plt.title(y[i])
 		plt.title(np.argmax(testY[i]))
 
 	plt.show()
 	plt.close()
+
 
 def train_model(trainX, trainY, testX, testY):
 
@@ -60,14 +57,7 @@ def train_model(trainX, trainY, testX, testY):
 	model.fit(trainX, trainY, epochs = 100, callbacks= my_callbacks, validation_split = 0.2)
 	model.evaluate(testX, testY)
 
-	predictedY = model.predict(testX[:5])
-
-	for i in range(5):
-		print(f'\n\nPredicted Value: {np.argmax(predictedY[i])}\n')
-		#print(predictedY.shape)
-	
-
-	# Calling `save('my_model.h5')` creates a h5 file `my_model.h5`.
+	# Calling `save('mnist_model.h5')` creates a h5 file `mnist_model.h5`.
 	model.save("mnist_model.h5")
 
 	
