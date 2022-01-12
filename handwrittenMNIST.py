@@ -20,6 +20,7 @@ def main():
 	#train_model(trainX, trainY, testX, testY)
 
 	model = load_model("mnist_model.h5")
+	modelSummary(model)
 
 	plot_predicted_data(testX, testY, model)
 
