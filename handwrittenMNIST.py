@@ -6,6 +6,8 @@ import tensorflow as tf
 from tensorflow.keras.layers import Activation, Input, Flatten, Dense
 from tensorflow.keras.models import Model
 
+from tensorflow.keras.models import load_model
+
 from tensorflow.keras.datasets.mnist import load_data
 from tensorflow.keras.utils import to_categorical
 import matplotlib.pyplot as plt
@@ -24,6 +26,8 @@ def main():
 	'''
 
 	
+	
+	# Train model
 	model.fit(trainX, trainY, epochs = 2, validation_split = 0.2)
 	model.evaluate(testX, testY)
 	
@@ -31,8 +35,26 @@ def main():
 	model.save('saved_model/my_model')
 
 	predictedY = model.predict(testX[:5])
-	print('\n\nPredicted Value')
-	print(np.argmax(predictedY))
+
+	for i in range(5):
+		print(f'\n\nPredicted Value: {np.argmax(predictedY[i])}\n')
+		#print(predictedY.shape)
+	
+
+	# Calling `save('my_model.h5')` creates a h5 file `my_model.h5`.
+	#model.save("mnist_model.h5")
+
+	'''
+	model = load_model("mnist_model.h5")
+	model.summary()
+	print()
+
+	predictedY = model.predict(testX[:1])
+	print(f'\n\nPredicted Value: {np.argmax(predictedY)}\n')
+
+	#print(np.argmax(predictedY))
+	plot_single_data(testX[:1], testY[:1])
+	'''
 
 
 def build_model():
@@ -67,6 +89,15 @@ def data_preparation(trainX, trainY, testX, testY):
 
 	return trainX, trainY, testX, testY
 
+
+def plot_single_data(x, y):
+	plt.figure(figsize=(20, 20))
+
+	plt.imshow(x[0], cmap = 'gray')
+	plt.title(np.argmax(y[0]))
+
+	plt.show()
+	plt.close()
 
 def plot_data(x, y):
 	plt.figure(figsize=(20, 20))
