@@ -17,8 +17,8 @@ def main():
     print("\n----------\nPrepare Hen Dataset")
     imgPrepare(hen)
 
-def imgPrepare(car):
-    imgDir = DIR + car
+def imgPrepare(object):
+    imgDir = DIR + object
     imgList = os.listdir(imgDir)
 
     n = len(imgList)
