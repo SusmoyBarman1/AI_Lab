@@ -1,6 +1,9 @@
 import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+
 import cv2
 import numpy as np
+import matplotlib.pyplot as plt
 
 DIR = '/home/cse/Desktop/codes/'
 img_size = 256
@@ -16,14 +19,14 @@ def main():
     # Working with Car
     print("\n----------\nPreparing Car Dataset")
     imgPrepare(car)
-    print("\n\n-----------------------\nChecking The resized Image")
-    checkResizedImage(resizedCar)
+    #print("\n\n-----------------------\nChecking The resized Image")
+    #checkResizedImage(resizedCar)
 
     # Working with hen
     print("\n----------\nPrepare Hen Dataset")
     imgPrepare(hen)
-    print("\n\n-----------------------\nChecking The resized Image")
-    checkResizedImage(resizedHen)
+    #print("\n\n-----------------------\nChecking The resized Image")
+    #checkResizedImage(resizedHen)
 
 
 def checkResizedImage(object):
@@ -71,7 +74,7 @@ def imgPrepare(object):
         if (os.path.exists(imgPath)):
             # Load Image
             img = cv2.imread(imgPath)
-            print(f"{imgPath}, img.shape: {img.shape}")
+            #print(f"{imgPath}, img.shape: {img.shape}")
 
             # Resize Image
             resizedImg = cv2.resize(img, (img_size, img_size))  
@@ -96,8 +99,9 @@ def imgPrepare(object):
     
     # Convert the list to numpy array\
     imgDataset = np.array(imgDataset, dtype=np.uint8)
-    print(f"imgDataset.shape: {imgDataset.shape}", end='\n\n')
+    #print(f"imgDataset.shape: {imgDataset.shape}", end='\n\n')
+    return imgDataset
 
-
+    
 if __name__ == "__main__":
     main()
