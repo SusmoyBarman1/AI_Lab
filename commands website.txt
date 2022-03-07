@@ -1,0 +1,39 @@
+1. composer create-project --prefer-dist laravel/laravel crudapplication
+2. Create the Database on xampp which name is crudapplication
+3. php artisan serve
+4. http://127.0.0.1:8000
+5. php artisan make:migration create_contacts_table
+6. Open "database/migration/2022....", copy:
+	class CreateContactsTable extends Migration
+	{
+    	public function up()
+    	{
+        	Schema::create('contacts', function (Blueprint $table) {
+            		$table->id();
+			$table->string(‘name’);
+			$table->string(‘address’);
+			$table->string(‘mobile’);
+            		$table->timestamps();
+        		});
+    		}
+    		public function down()
+    		{
+        		Schema::dropIfExists('contacts');
+    		}
+	}
+
+7. php artisan migrate
+8. php artisan make:controller ContactController --resource
+9. php artisan make:model Contact
+
+10. Create a Folder inside the resources/views named 'contacts'
+11. Create 'pagename.blade.php' inside 'resources/views/contacts'.
+12. Create 'index.blade.php' inside 'resources/views/contacts'.
+13. Create 'Create.blade.php' inside 'resources/views/contacts'.
+14. Create 'edit.blade.php' inside 'resources/views/contacts'.
+15. Create 'show.blade.php' inside 'resources/views/contacts'.
+
+16. use App\Models\Contact;
+17. Route::resource(‘/contact’, ContactController::class);
+
+link: https://www.tutussfunny.com/laravel-8-crud-application/
